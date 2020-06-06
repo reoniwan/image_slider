@@ -1,24 +1,26 @@
 package com.frozenproject.myimageslider
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.makeramen.roundedimageview.RoundedImageView
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.slide_item_container.view.*
 
 class SliderAdapter(
-    private var sliderItem: ArrayList<SliderItem>,
-    private var viewPager2: ViewPager2
+    private val sliderItem: List<IntroSlide>
 ): RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
 
     inner class SliderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        var imageView: RoundedImageView? = null
+        fun bind(data: IntroSlide){
+            itemView.txt_title.text = data.title
+            itemView.txt_description.text = data.description
 
-        fun bind(data: SliderItem){
-            imageView = itemView.findViewById(R.id.imageSlide)
-            imageView?.setImageResource(data.image)
+            Glide.with(itemView.context)
+                .load(data.icon)
+                .into(itemView.imageSlideIcon)
+
 
         }
     }
@@ -39,13 +41,11 @@ class SliderAdapter(
 
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
         holder.bind(sliderItem[position])
-        if (position == sliderItem.size - 2){
-            viewPager2.post(runnable)
-        }
+
     }
 
-    private var runnable = Runnable {
-        sliderItem.addAll(sliderItem)
-        notifyDataSetChanged()
-    }
+//    private var runnable = Runnable {
+//        sliderItem.addAll(sliderItem)
+//        notifyDataSetChanged()
+//    }
 }

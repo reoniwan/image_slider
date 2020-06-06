@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.makeramen.roundedimageview.RoundedImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:adjustViewBounds="true"
-    android:id="@+id/imageSlide"
-    app:riv_corner_radius="12dp">
+    android:orientation="vertical"
+    android:padding="15dp">
 
-</com.makeramen.roundedimageview.RoundedImageView>
+    <ImageView
+        android:id="@+id/imageSlideIcon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/title_text"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="@string/description_text"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="15sp" />
+
+</LinearLayout>

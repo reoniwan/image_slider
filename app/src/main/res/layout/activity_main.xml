@@ -4,15 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
     tools:context=".MainActivity">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerImageSlider"
+    <TextView
+        android:id="@+id/textSkipIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:text="@string/skip_intro"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorAccent"
+        android:minWidth="118dp"
+        android:visibility="invisible"
+        android:text="@string/next"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/textSkipIntro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/indicatorsContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="80dp"
-        android:paddingEnd="80dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/buttonNext"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/introSliderViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="12dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/indicatorsContainer"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
