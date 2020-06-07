@@ -19,103 +19,56 @@ import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
-    private val introSliderAdapter = SliderAdapter(
-        listOf(
-            IntroSlide(
-                "Painting School",
-                "Painting School is a Paint learning platform online",
-                R.drawable.img1
-            ),
-            IntroSlide(
-                "Class Online",
-                "You can paint your imagination",
-                R.drawable.img2
-            ),
-            IntroSlide(
-                "Portfolio",
-                "You can share your portfolio",
-                R.drawable.img3
+    private var travelLocationAdapter = TravelLocationAdapter(
+            listOf(
+                TravelLocation(
+                    "France",
+                    "Eiffel Tower",
+                    "https://www.infinityandroid.com/images/france_eiffel_tower.jpg",
+                    4.8f
+                ),
+                TravelLocation(
+                    "Indonesia",
+                    "Mountain View",
+                    "https://www.infinityandroid.com/images/indonesia_mountain_view.jpg",
+                    4.8f
+                ),
+                TravelLocation(
+                    "India",
+                    "Taj Mahal",
+                    "https://www.infinityandroid.com/images/india_taj_mahal.jpg",
+                    4.3f
+                ),
+                TravelLocation(
+                    "Canada",
+                    "Lake View",
+                    "https://www.infinityandroid.com/images/canada_lake_view.jpg",
+                    4.2f
+                )
             )
-        )
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        introSliderViewPager.adapter = introSliderAdapter
+        locationViewPager.adapter = travelLocationAdapter
 
-        setupIndicators()
-        setCurrentIndicator(0)
+        locationViewPager.clipToPadding = false
+        locationViewPager.clipChildren = false
+        locationViewPager.offscreenPageLimit = 3
+        locationViewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 
-        introSliderViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                setCurrentIndicator(position)
-            }
-        })
-
-        buttonNext.setOnClickListener {
-            if (introSliderViewPager.currentItem + 1 < introSliderAdapter.itemCount){
-                introSliderViewPager.currentItem += 1
-            }else{
-                startActivity(Intent(applicationContext, AnotherActivity::class.java))
-            }
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
+        compositePageTransformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = 0.95f + r * 0.05f
         }
 
-        textSkipIntro.setOnClickListener {
-            startActivity(Intent(applicationContext, AnotherActivity::class.java))
-        }
+        locationViewPager.setPageTransformer(compositePageTransformer)
+
     }
 
-    private fun setupIndicators(){
-        val indicators = arrayOfNulls<ImageView>(introSliderAdapter.itemCount)
-        val layoutParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-
-        layoutParams.setMargins(8, 0, 8,0)
-        for (i in indicators.indices){
-            indicators[i] = ImageView(applicationContext)
-            indicators[i].apply {
-                this?.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext,
-                        R.drawable.indicator_inactive
-                    )
-                )
-                this?.layoutParams = layoutParams
-            }
-
-            indicatorsContainer.addView(indicators[i])
-        }
-    }
-
-    private fun setCurrentIndicator(index: Int){
-        val childCount = indicatorsContainer.childCount
-
-        for (i in 0 until childCount){
-            val imageView = indicatorsContainer[i] as ImageView
-            if (i == index){
-                imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext,
-                        R.drawable.indicator_active
-                    )
-                )
-            }else{
-                imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext,
-                        R.drawable.indicator_inactive
-                    )
-                )
-            }
-        }
-
-        if(index == 2){
-            buttonNext.visibility = View.VISIBLE
-        }else{
-            buttonNext.visibility = View.INVISIBLE
-        }
-    }
 }
 

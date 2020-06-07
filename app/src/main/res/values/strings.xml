@@ -4,4 +4,10 @@
     <string name="next">Next</string>
     <string name="title_text">Title Text</string>
     <string name="description_text">Description Text</string>
+    <string name="explore">Explore</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="hello_reno">Hello Reno</string>
+    <string name="where_are_we">Where Are We</string>
+    <string name="going_today">going today?</string>
 </resources>

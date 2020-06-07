@@ -4,53 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".MainActivity">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardProfilePicture"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_picture"/>
+    </androidx.cardview.widget.CardView>
+
     <TextView
-        android:id="@+id/textSkipIntro"
-        android:layout_width="wrap_content"
+        android:id="@+id/textHello"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
-        android:text="@string/skip_intro"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/hello_reno"
+        android:textColor="#212121"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/cardProfilePicture"
+        app:layout_constraintEnd_toStartOf="@id/cardProfilePicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cardProfilePicture"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/colorAccent"
-        android:minWidth="118dp"
-        android:visibility="invisible"
-        android:text="@string/next"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/textSkipIntro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/indicatorsContainer"
+    <TextView
+        android:id="@+id/textWhereAreWe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/buttonNext"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/where_are_we"
+        android:textColor="#212121"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/cardProfilePicture"/>
+
+    <TextView
+        android:id="@+id/textGoing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/going_today"
+        android:textColor="#757575"
+        android:textSize="40sp"
+        app:layout_constraintTop_toBottomOf="@id/textWhereAreWe"/>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/introSliderViewPager"
+        android:id="@+id/locationViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@id/indicatorsContainer"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintTop_toBottomOf="@id/textGoing"/>
+
+   <me.ibrahimsn.lib.SmoothBottomBar
+       android:id="@+id/bottomBar"
+       android:layout_width="match_parent"
+       android:layout_height="78dp"
+       android:layout_marginStart="10dp"
+       android:layout_marginEnd="10dp"
+       app:iconSize="20dp"
+       app:iconTint="#757575"
+       app:iconTintActive="#212121"
+       app:indicatorColor="#ececec"
+       app:indicatorRadius="10dp"
+       app:menu="@menu/navigation_menu"
+       app:textColor="#212121"
+       app:textSize="15sp"
+       app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
